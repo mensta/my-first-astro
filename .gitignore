@@ -30,3 +30,8 @@ src/content/**/*.mdx
 
 # ignore public dir
 public/
+
+# ignore site config files
+src/config/config.json
+src/config/menu.json
+src/config/social.json
