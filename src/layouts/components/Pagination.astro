@@ -5,9 +5,32 @@ const indexPageLink = currentPage === 2;
 const hasPrevPage = currentPage > 1;
 const hasNextPage = totalPages > currentPage;
 
-let pageList = [];
-for (let i = 1; i <= totalPages; i++) {
-  pageList.push(i);
+const pageList: any[] = [];
+
+// Maximum number of page buttons to display
+const maxPageNumbers = 5;
+
+if (totalPages > maxPageNumbers) {
+  for (let i = 0; i < maxPageNumbers; i++) {
+    const page = currentPage + i - 2;
+
+    if (page <= 1 || pageList.includes(page) || page >= totalPages) {
+      continue;
+    }
+    pageList.push(page);
+  }
+}
+
+if (pageList[0] === 2) {
+  pageList.unshift(1);
+} else {
+  pageList.unshift(1, "...");
+}
+
+if (pageList[pageList.length - 1] === totalPages - 1) {
+  pageList.push(totalPages);
+} else {
+  pageList.push("...", totalPages);
 }
 ---
 
@@ -60,6 +83,12 @@ for (let i = 1; i <= totalPages; i++) {
 
       {/* page index */}
       {pageList.map((pagination, i) =>
+        pagination === "..." ? (
+          // Render ellipsis element
+          <span class="border border-gray-400 opacity-40 rounded-md h-10 w-10 leading-[36px] font-semibold text-dark flex items-center justify-center pointer-events-none">
+            ...
+          </span>
+        ) : // Render page number link
         pagination === currentPage ? (
           <span
             aria-current="page"
@@ -70,7 +99,7 @@ for (let i = 1; i <= totalPages; i++) {
         ) : (
           <a
             href={
-              i === 0
+              pagination === 1
                 ? `${section ? "/" + section : "/"}`
                 : `${section ? "/" + section : ""}/page/${pagination}`
             }
