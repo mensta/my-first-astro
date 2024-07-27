@@ -33,11 +33,18 @@ export interface Props {
   image?: string;
   noindex?: boolean;
   canonical?: string;
+  content?: string;
 }
 
 // distructure frontmatters
-const { title, meta_title, description, image, noindex, canonical } =
+const { title, meta_title, description, image, noindex, canonical, content } =
   Astro.props;
+
+const shortenedContent = content
+  ?.replace(/[\n]+/g, "\n")
+  ?.replace(/\n/g, " ")
+  ?.replace(/(https?|ftp)(:\/\/[\w\/:%#\$&\?\(\)~\.=\+\-]+)/g, "")
+  ?.substring(0, 120);
 ---
 
 <!doctype html>
@@ -106,7 +113,8 @@ const { title, meta_title, description, image, noindex, canonical } =
     <meta
       name="description"
       content={plainify(
-        description ? description : config.metadata.meta_description,
+        (shortenedContent && `${shortenedContent}...`) ||
+          (description ? description : config.metadata.meta_description),
       )}
     />
 
@@ -127,7 +135,8 @@ const { title, meta_title, description, image, noindex, canonical } =
     <meta
       property="og:description"
       content={plainify(
-        description ? description : config.metadata.meta_description,
+        (shortenedContent && `${shortenedContent}...`) ||
+          (description ? description : config.metadata.meta_description),
       )}
     />
     <meta property="og:type" content="website" />
