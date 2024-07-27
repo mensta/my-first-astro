@@ -7,6 +7,7 @@ import { defineConfig, squooshImageService } from "astro/config";
 import remarkCollapse from "remark-collapse";
 import remarkToc from "remark-toc";
 import remarkLinkCard from 'remark-link-card';
+import partytown from "@astrojs/partytown";
 import config from "./src/config/config.json";
 
 // https://astro.build/config
@@ -37,6 +38,11 @@ export default defineConfig({
       ],
     }),
     mdx(),
+    partytown({
+      config: {
+        forward: ["dataLayer.push"],
+      },
+    }),
   ],
   markdown: {
     remarkPlugins: [

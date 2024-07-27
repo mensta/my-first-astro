@@ -177,6 +177,15 @@ const shortenedContent = content
       }`}
     />
     <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Google tag (gtag.js) -->
+    <script type="text/partytown" src={`https://www.googletagmanager.com/gtag/js?id=${config.envConfig.analytics_id}`}></script>
+    <script type="text/partytown" define:vars={{ analyticsId: config.envConfig.analytics_id }}>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', analyticsId);
+    </script>
   </head>
   <body>
     <TwSizeIndicator />
