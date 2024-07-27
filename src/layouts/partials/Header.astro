@@ -18,7 +18,7 @@ export interface NavigationLink {
 const { main }: { main: NavigationLink[] } = menu;
 ---
 
-<header class="header pt-6">
+<header class="header py-4">
   <nav class="navbar container">
     <!-- logo -->
     <div class="order-0">
@@ -98,3 +98,9 @@ const { main }: { main: NavigationLink[] } = menu;
     </div>
   </nav>
 </header>
+
+<style>
+  header {
+    box-shadow: 0 1px 0 0 rgba(0, 0, 0, .1);
+  }
+</style>
