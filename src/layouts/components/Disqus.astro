@@ -1,0 +1,54 @@
+---
+import config from "@/config/config.json";
+
+const DISQUS_EMBED_URL = config.disqus_embed_url;
+---
+
+<div id="disqus_thread"></div>
+
+<script is:inline define:vars={{ DISQUS_EMBED_URL }}>
+  if (!window.DisqusWidget) {
+    window.DisqusWidget = {
+      overwriteGlobalSelectors: function () {
+        window.$disqus = document.querySelector("#disqus_thread");
+      },
+      init: function () {
+        this.overwriteGlobalSelectors();
+        this.addListeners();
+        this.initDisqus();
+      },
+      addListeners: function () {
+        // After language switched
+        document.addEventListener("astro:after-swap", () => {
+          this.overwriteGlobalSelectors();
+          this.initDisqus();
+        });
+      },
+      initDisqus: () => {
+        // early escape if $disqus not exists
+        if (window.$disqus === null) {
+          return;
+        }
+
+        // Reset DISQUS, Rather than loading new embed.js
+        if (window.DISQUS) {
+          window.DISQUS.reset({
+            reload: true,
+          });
+          return;
+        }
+
+        (function () {
+          // DON'T EDIT BELOW THIS LINE
+          const d = document,
+            s = d.createElement("script");
+          s.src = DISQUS_EMBED_URL;
+          s.setAttribute("data-timestamp", String(+new Date()));
+          (d.head || d.body).appendChild(s);
+        })();
+      },
+    };
+
+    window.DisqusWidget.init();
+  }
+</script>

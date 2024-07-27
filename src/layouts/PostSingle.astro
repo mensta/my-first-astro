@@ -8,6 +8,7 @@ import similerItems from "@/lib/utils/similarItems";
 import { humanize, markdownify, slugify } from "@/lib/utils/textConverter";
 import { BiCalendarEdit, BiCategoryAlt } from "react-icons/bi";
 import labels from "@/config/labels.json";
+import Disqus from "@/components/Disqus.astro";
 
 const allAuthors = await getSinglePage("authors");
 const posts = await getSinglePage("posts");
@@ -134,3 +135,9 @@ const { title, description, authors, categories, image, date, tags } =
     </section>
   )
 }
+
+<section class="section pt-0">
+  <div class="container">
+    <Disqus />
+  </div>
+</section>
