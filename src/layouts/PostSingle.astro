@@ -7,6 +7,7 @@ import dateFormat from "@/lib/utils/dateFormat";
 import similerItems from "@/lib/utils/similarItems";
 import { humanize, markdownify, slugify } from "@/lib/utils/textConverter";
 import { BiCalendarEdit, BiCategoryAlt } from "react-icons/bi";
+import labels from "@/config/labels.json";
 
 const allAuthors = await getSinglePage("authors");
 const posts = await getSinglePage("posts");
@@ -127,7 +128,7 @@ const { title, description, authors, categories, image, date, tags } =
   similarPosts.length > 0 && (
     <section class="section pt-0">
       <div class="container">
-        <h2 class="mb-8 text-center h3">Similar Posts</h2>
+        <h2 class="mb-8 text-center h3">{labels.similarPosts}</h2>
         <SimilarPosts posts={similarPosts.slice(0, 3)} />
       </div>
     </section>
