@@ -1,0 +1,50 @@
+---
+import Base from "@/layouts/Base.astro";
+import fs from "fs/promises";
+import path from "path";
+import { Image } from 'astro:assets';
+
+const getImages = async (dirPath: string): Promise<[{ src: string }]> => {
+  let images: any = [];
+  const entries = await fs.readdir(dirPath, { withFileTypes: true });
+
+  for (const entry of entries) {
+    const fullPath = path.join(dirPath, entry.name);
+    if (entry.isDirectory()) {
+      images = [...images, ...(await getImages(fullPath))];
+    } else if (/\.(jpg|jpeg|png|gif|svg)$/.test(fullPath)) {
+      images.push({ src: "/" + path.relative("public", fullPath) });
+    }
+  }
+
+  return images;
+};
+
+const allImages = await getImages("./public/images/");
+---
+
+<Base title={"Images"}>
+  <section class="section">
+    <div class="container text-center">
+      <h1 class="h2 page-heading">Images</h1>
+      <ul class="space-x-4">
+        {
+          allImages.map((image) => (
+            <li>
+              <a href={image.src}>
+                <Image src={image.src} alt="image" width="200" height="100" />
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+</Base>
+
+<style>
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+  }
+</style>
