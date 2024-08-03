@@ -35,3 +35,6 @@ public/
 src/config/config.json
 src/config/menu.json
 src/config/social.json
+
+# ignore images
+src/assets/

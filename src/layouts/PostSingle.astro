@@ -17,6 +17,10 @@ const similarPosts = similerItems(post, posts, post.slug);
 const { Content } = await post.render();
 const { title, description, authors, categories, image, date, tags } =
   post.data;
+
+const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/**/*.{jpeg,jpg,png,gif}');
+console.log(images, image);
+const eyeCatchImage = image ? images[`/src/assets${image}`]() : null;
 ---
 
 <section class="section">
@@ -81,9 +85,9 @@ const { title, description, authors, categories, image, date, tags } =
 
       <div class="md:col-10 mt-8 mb-2">
         {
-          image && (
+          image && eyeCatchImage && (
             <Image
-              src={image}
+              src={eyeCatchImage}
               height={500}
               width={1000}
               alt={title}
