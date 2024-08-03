@@ -19,7 +19,6 @@ const { title, description, authors, categories, image, date, tags } =
   post.data;
 
 const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/**/*.{jpeg,jpg,png,gif}');
-console.log(images, image);
 const eyeCatchImage = image ? images[`/src/assets${image}`]() : null;
 ---
 
