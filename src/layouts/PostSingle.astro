@@ -10,7 +10,7 @@ import { BiCalendarEdit, BiCategoryAlt } from "react-icons/bi";
 import labels from "@/config/labels.json";
 import Disqus from "@/components/Disqus.astro";
 
-const allAuthors = await getSinglePage("authors");
+// const allAuthors = await getSinglePage("authors");
 const posts = await getSinglePage("posts");
 const { post } = Astro.props;
 const similarPosts = similerItems(post, posts, post.slug);
@@ -28,7 +28,7 @@ const eyeCatchImage = image ? images[`/src/assets${image}`]() : null;
       <div class="md:col-10 text-center">
         <h1 set:html={markdownify(title)} class="h2" />
         <ul class="mt-4 flex flex-wrap items-center justify-center text-text">
-          <li class="mx-3">
+          <!-- <li class="mx-3">
             {
               allAuthors
                 .filter((author) =>
@@ -54,7 +54,7 @@ const eyeCatchImage = image ? images[`/src/assets${image}`]() : null;
                   </a>
                 ))
             }
-          </li>
+          </li> -->
           <li class="mx-3 flex items-center flex-wrap font-medium">
             <BiCalendarEdit className="mr-1 h-5 w-5 text-gray-600" />
             <>{dateFormat(date)}</>
