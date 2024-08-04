@@ -6,7 +6,13 @@ const DISQUS_EMBED_URL = config.envConfig.disqus_embed_url;
 
 <div id="disqus_thread"></div>
 
-<script is:inline define:vars={{ DISQUS_EMBED_URL }}>
+<script>
+  declare global {
+    var DisqusWidget: any;
+    var $disqus: any;
+    var DISQUS: any;
+    var DISQUS_EMBED_URL: any;
+  }
   if (!window.DisqusWidget) {
     window.DisqusWidget = {
       overwriteGlobalSelectors: function () {
@@ -42,13 +48,16 @@ const DISQUS_EMBED_URL = config.envConfig.disqus_embed_url;
           // DON'T EDIT BELOW THIS LINE
           const d = document,
             s = d.createElement("script");
-          s.src = DISQUS_EMBED_URL;
+          s.src = window.DISQUS_EMBED_URL;
           s.setAttribute("data-timestamp", String(+new Date()));
           (d.head || d.body).appendChild(s);
         })();
       },
     };
-
-    window.DisqusWidget.init();
   }
+</script>
+
+<script is:inline define:vars={{ DISQUS_EMBED_URL }}>
+  window.DISQUS_EMBED_URL = DISQUS_EMBED_URL;
+  window.DisqusWidget.init();
 </script>
