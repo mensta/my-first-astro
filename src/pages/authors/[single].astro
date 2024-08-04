@@ -54,7 +54,7 @@ const currentPosts = sortPostsByDate.filter((post) => {
               <div class="col-12 sm:col-6 lg:col-4">
                 {post.data.image && (
                   <a
-                    href={`/${post.slug}`}
+                    href={`/${post.slug}/`}
                     class="rounded-lg block hover:text-primary overflow-hidden group"
                   >
                     <Image
@@ -94,7 +94,7 @@ const currentPosts = sortPostsByDate.filter((post) => {
                 </ul>
                 <h3 class="h5">
                   <a
-                    href={`/${post.slug}`}
+                    href={`/${post.slug}/`}
                     class="block hover:text-primary transition duration-300"
                   >
                     {post.data.title}
