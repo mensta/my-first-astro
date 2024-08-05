@@ -58,6 +58,10 @@ const DISQUS_EMBED_URL = config.envConfig.disqus_embed_url;
 </script>
 
 <script is:inline define:vars={{ DISQUS_EMBED_URL }}>
-  window.DISQUS_EMBED_URL = DISQUS_EMBED_URL;
-  window.DisqusWidget.init();
+  const i = setInterval(() => {
+    if (!window.DisqusWidget) return;
+    window.DISQUS_EMBED_URL = DISQUS_EMBED_URL;
+    window.DisqusWidget.init();
+    clearInterval(i);
+  }, 100);
 </script>
