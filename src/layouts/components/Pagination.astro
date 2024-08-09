@@ -43,7 +43,7 @@ if (pageList[pageList.length - 1] === totalPages - 1) {
           href={
             indexPageLink
               ? `${section ? "/" + section : "/"}`
-              : `${section ? "/" + section : ""}/page/${currentPage - 1}`
+              : `${section ? "/" + section : ""}/page/${currentPage - 1}/`
           }
           class="border border-primary hover:bg-primary hover:text-white rounded-md h-10 w-10 leading-[36px] font-semibold text-dark flex items-center justify-center transition duration-200"
         >
@@ -101,7 +101,7 @@ if (pageList[pageList.length - 1] === totalPages - 1) {
             href={
               pagination === 1
                 ? `${section ? "/" + section : "/"}`
-                : `${section ? "/" + section : ""}/page/${pagination}`
+                : `${section ? "/" + section : ""}/page/${pagination}/`
             }
             aria-current="page"
             class={`border border-primary hover:bg-primary hover:text-white rounded-md h-10 w-10 leading-[36px] font-semibold text-dark flex items-center justify-center transition duration-200`}
@@ -114,7 +114,7 @@ if (pageList[pageList.length - 1] === totalPages - 1) {
       {/* next page */}
       {hasNextPage ? (
         <a
-          href={`${section ? "/" + section : ""}/page/${currentPage + 1}`}
+          href={`${section ? "/" + section : ""}/page/${currentPage + 1}/`}
           class="border border-primary hover:bg-primary hover:text-white rounded-md h-10 w-10 leading-[36px] font-semibold text-dark flex items-center justify-center transition duration-200"
         >
           <span class="sr-only">Next</span>
