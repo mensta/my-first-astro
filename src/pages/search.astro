@@ -6,11 +6,23 @@ import { getSinglePage } from "@/lib/contentParser.astro";
 // Retrieve all articles
 const posts = await getSinglePage("posts");
 
+const images = import.meta.glob<{ default: ImageMetadata }>(
+  "/src/assets/**/*.{jpeg,jpg,png,gif}",
+);
+
 // List of items to search in
-const searchList = posts.map((item: any) => ({
-  slug: item.slug,
-  data: item.data,
-  content: item.body,
+const searchList = await Promise.all(posts.map(async (item: any) => {
+  item.data = Object.assign({}, item.data);
+  
+  if (item.data.image) {
+    item.data.importedImage = (await images[`/src/assets${item.data.image}`]()).default.src;
+  }
+
+  return {
+    slug: item.slug,
+    data: item.data,
+    content: item.body,
+  };
 }));
 ---
 

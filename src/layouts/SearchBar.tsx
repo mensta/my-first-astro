@@ -100,7 +100,7 @@ export default function SearchBar({ searchList }: Props) {
               >
                 <img
                   className="group-hover:scale-[1.03] transition duration-300 w-full"
-                  src={item.data.image}
+                  src={item.data.importedImage || item.data.image}
                   alt={item.data.title}
                   width={445}
                   height={230}
