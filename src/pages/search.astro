@@ -11,19 +11,27 @@ const images = import.meta.glob<{ default: ImageMetadata }>(
 );
 
 // List of items to search in
-const searchList = await Promise.all(posts.map(async (item: any) => {
-  item.data = Object.assign({}, item.data);
-  
-  if (item.data.image) {
-    item.data.importedImage = (await images[`/src/assets${item.data.image}`]()).default.src;
-  }
+const searchList = await Promise.all(
+  posts.map(async (item: any) => {
+    item.data = Object.assign({}, item.data);
 
-  return {
-    slug: item.slug,
-    data: item.data,
-    content: item.body,
-  };
-}));
+    if (item.data.image) {
+      if (!images[`/src/assets${item.data.image}`]) {
+        item.data.importedImage = item.data.image;
+      } else {
+        item.data.importedImage = (
+          await images[`/src/assets${item.data.image}`]()
+        ).default.src;
+      }
+    }
+
+    return {
+      slug: item.slug,
+      data: item.data,
+      content: item.body,
+    };
+  }),
+);
 ---
 
 <Base title={`Search`}>

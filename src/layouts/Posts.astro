@@ -13,6 +13,10 @@ const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/**/*.{j
 
 posts.forEach((post: any) => {
   if (!post.data.image) return;
+  if (!images[`/src/assets${post.data.image}`]) {
+    post.data.importedImage = post.data.image;
+    return;
+  }
   post.data.importedImage = images[`/src/assets${post.data.image}`]();
 });
 ---

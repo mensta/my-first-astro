@@ -19,7 +19,11 @@ const { title, description, authors, categories, image, date, tags } =
   post.data;
 
 const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/**/*.{jpeg,jpg,png,gif}');
-const eyeCatchImage = image ? images[`/src/assets${image}`]() : null;
+const eyeCatchImage = (() => {
+  if (!image) return null;
+  const imgPath = `/src/assets${image}`;
+  return images[imgPath] ? images[imgPath]() : image;
+})();
 ---
 
 <section class="section">
