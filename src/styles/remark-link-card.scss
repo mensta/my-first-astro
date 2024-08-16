@@ -2,10 +2,16 @@
   --padding-x: 1rem;
   --padding-y: 0.7rem;
   --border-radius: calc(0.5rem - 1px);
+
+  width: 100%;
+  margin-bottom: 1.25em;
+  display: grid;
+  grid-template-columns: 1fr 116px;
+  gap: 1rem;
+
   border: 1px solid var(--tw-prose-hr);
   border-radius: calc(var(--border-radius) + 1px);
   text-decoration: none;
-
   transition: background-color 150ms;
 
   &:hover {
@@ -15,15 +21,10 @@
     // }
   }
 
-  width: 100%;
-  margin-bottom: 1.25em;
-
-  display: grid;
-  grid-template-columns: 1fr 116px;
-  gap: 1rem;
   @media (min-width: 60ch) {
     grid-template-columns: 1fr 220px;
   }
+
   .rlc-info {
     display: flex;
     flex-direction: column;
@@ -35,6 +36,7 @@
     max-width: 100%;
     min-width: 100%;
     border-radius: var(--border-radius) 0 0 var(--border-radius);
+
     .rlc-title {
       font-size: 1rem;
       font-weight: bold;
@@ -47,12 +49,10 @@
       -webkit-box-orient: vertical;
       -webkit-line-clamp: 2;
     }
+
     .rlc-description {
       font-size: 0.8rem;
       color: #737373;
-      @media (prefers-color-scheme: dark) {
-        color: #a3a3a3;
-      }
 
       margin-bottom: 0.5em;
 
@@ -60,35 +60,46 @@
       text-overflow: ellipsis;
       white-space: nowrap;
       -webkit-line-clamp: 1;
+
+      @media (prefers-color-scheme: dark) {
+        color: #a3a3a3;
+      }
     }
+
     .rlc-url-container {
       display: flex;
       align-items: center;
       gap: 0.5rem;
+
       .rlc-favicon {
         margin-top: 0.15rem;
         margin-bottom: 0;
       }
+
       .rlc-url {
         font-size: 0.8rem;
         color: #525252;
-        @media (prefers-color-scheme: dark) {
-          color: #d4d4d4;
-        }
 
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
         -webkit-line-clamp: 1;
+
+        @media (prefers-color-scheme: dark) {
+          color: #d4d4d4;
+        }
       }
     }
   }
+
   .rlc-image-container {
     grid-column: 2;
     aspect-ratio: 1 / 1;
+
     @media (min-width: 60ch) {
       aspect-ratio: 1.91 / 1;
     }
+
     .rlc-image {
       object-fit: cover;
       height: 100%;
