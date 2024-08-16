@@ -100,7 +100,7 @@ posts.forEach((post: any) => {
         </h3>
         <p class="text-text">
           {plainify(
-            post.body?.slice(
+            post.body?.replace(/http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w-.\/?%&=]*)?/gi, "")?.slice(
               0,
               Number(
                 summary_length
