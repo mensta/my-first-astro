@@ -12,18 +12,11 @@ import Disqus from "@/components/Disqus.astro";
 
 // const allAuthors = await getSinglePage("authors");
 const posts = await getSinglePage("posts");
-const { post } = Astro.props;
+const { post, importedImage: eyeCatchImage } = Astro.props;
 const similarPosts = similerItems(post, posts, post.slug);
 const { Content } = await post.render();
 const { title, description, authors, categories, image, date, tags } =
   post.data;
-
-const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/**/*.{jpeg,jpg,png,gif}');
-const eyeCatchImage = (() => {
-  if (!image) return null;
-  const imgPath = `/src/assets${image}`;
-  return images[imgPath] ? images[imgPath]() : image;
-})();
 ---
 
 <section class="section">

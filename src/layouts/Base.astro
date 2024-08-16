@@ -34,10 +34,11 @@ export interface Props {
   noindex?: boolean;
   canonical?: string;
   content?: string;
+  importedImage?: any;
 }
 
 // distructure frontmatters
-const { title, meta_title, description, image, noindex, canonical, content } =
+const { title, meta_title, description, image, noindex, canonical, content, importedImage } =
   Astro.props;
 
 const shortenedContent = content
@@ -45,6 +46,11 @@ const shortenedContent = content
   ?.replace(/\n/g, " ")
   ?.replace(/(https?|ftp)(:\/\/[\w\/:%#\$&\?\(\)~\.=\+\-]+)/g, "")
   ?.substring(0, 120);
+
+const eyeCatchImage = await (async () => {
+  if (importedImage) return importedImage.then((d: any) => d.default.src);
+  return image;
+})();
 ---
 
 <!doctype html>
@@ -165,7 +171,7 @@ const shortenedContent = content
     <meta
       property="og:image"
       content={`${config.site.base_url}${
-        image ? image : config.metadata.meta_image
+        eyeCatchImage ? eyeCatchImage : config.metadata.meta_image
       }`}
     />
 
@@ -173,7 +179,7 @@ const shortenedContent = content
     <meta
       name="twitter:image"
       content={`${config.site.base_url}${
-        image ? image : config.metadata.meta_image
+        eyeCatchImage ? eyeCatchImage : config.metadata.meta_image
       }`}
     />
     <meta name="twitter:card" content="summary_large_image" />

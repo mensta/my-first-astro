@@ -24,6 +24,13 @@ export async function getStaticPaths() {
 
 const { page } = Astro.props;
 const { title, meta_title, description, image } = page.data;
+
+const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/**/*.{jpeg,jpg,png,gif}');
+const eyeCatchImage = (() => {
+  if (!image) return null;
+  const imgPath = `/src/assets${image}`;
+  return images[imgPath] ? images[imgPath]() : image;
+})();
 ---
 
 <Base
@@ -31,11 +38,12 @@ const { title, meta_title, description, image } = page.data;
   meta_title={meta_title}
   description={description}
   image={image}
+  importedImage={eyeCatchImage}
   content={page.body}
 >
   {
     postsSlug.includes(page.slug) ? (
-      <PostSingle post={page} />
+      <PostSingle post={page} importedImage={eyeCatchImage} />
     ) : (
       <Default data={page} />
     )
