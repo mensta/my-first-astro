@@ -8,7 +8,7 @@ const ADSENSE_TEST_MODE = config.envConfig.adsense_test_mode;
 
 <script is:inline define:vars={{ ADSENSE_PUB_ID, ADSENSE_INARTICLE_SLOT_ID, ADSENSE_TEST_MODE }}>
   function insertInArticleAds() {
-    const h2Elements = document.querySelectorAll("h2");
+    const h2Elements = document.querySelectorAll("article h2");
     const endAdContainer = document.getElementById("article-end-ad");
     const adCode = `
       <ins class="adsbygoogle" style="display:block"
