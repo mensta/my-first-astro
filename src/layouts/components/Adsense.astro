@@ -9,11 +9,8 @@ const ADSENSE_TEST_MODE = config.envConfig.adsense_test_mode;
 <script is:inline define:vars={{ ADSENSE_PUB_ID, ADSENSE_INARTICLE_SLOT_ID, ADSENSE_TEST_MODE }}>
   function insertInArticleAds() {
     const h2Elements = document.querySelectorAll("h2");
-    let insertCount = 0;
-
-    for (let i = 0; i < h2Elements.length; i++) {
-      if (i % 2 !== 0) {
-        const adCode = `
+    const endAdContainer = document.getElementById("article-end-ad");
+    const adCode = `
       <ins class="adsbygoogle" style="display:block"
            data-ad-client="ca-pub-${ADSENSE_PUB_ID}"
            data-ad-slot="${ADSENSE_INARTICLE_SLOT_ID}"
@@ -21,10 +18,20 @@ const ADSENSE_TEST_MODE = config.envConfig.adsense_test_mode;
            data-ad-format="fluid"
            ${ADSENSE_TEST_MODE ? 'data-adtest="on"' : ''}>
       </ins>`;
+    let insertCount = 0;
+
+    for (let i = 0; i < h2Elements.length; i++) {
+      if (i % 2 === 0) {
         insertCount++;
         h2Elements[i].insertAdjacentHTML("beforebegin", adCode);
       }
     }
+
+    if (endAdContainer) {
+      endAdContainer.innerHTML = adCode;
+      insertCount++;
+    }
+
     Array(insertCount).fill().forEach(() => (adsbygoogle = window.adsbygoogle || []).push({}));
   }
 
