@@ -9,6 +9,7 @@ const ADSENSE_TEST_MODE = config.envConfig.adsense_test_mode;
 <script is:inline define:vars={{ ADSENSE_PUB_ID, ADSENSE_INARTICLE_SLOT_ID, ADSENSE_TEST_MODE }}>
   function insertInArticleAds() {
     const h2Elements = document.querySelectorAll("h2");
+    let insertCount = 0;
 
     for (let i = 0; i < h2Elements.length; i++) {
       if (i % 2 !== 0) {
@@ -19,13 +20,12 @@ const ADSENSE_TEST_MODE = config.envConfig.adsense_test_mode;
            data-ad-layout="in-article"
            data-ad-format="fluid"
            ${ADSENSE_TEST_MODE ? 'data-adtest="on"' : ''}>
-      </ins>
-      <script>(adsbygoogle = window.adsbygoogle || []).push({});<\/script>
-    `;
-        console.log("insert", h2Elements);
+      </ins>`;
+        insertCount++;
         h2Elements[i].insertAdjacentHTML("beforebegin", adCode);
       }
     }
+    Array(insertCount).fill().forEach(() => (adsbygoogle = window.adsbygoogle || []).push({}));
   }
 
   window.addEventListener(
