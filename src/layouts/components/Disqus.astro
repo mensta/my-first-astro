@@ -58,10 +58,17 @@ const DISQUS_EMBED_URL = config.envConfig.disqus_embed_url;
 </script>
 
 <script is:inline define:vars={{ DISQUS_EMBED_URL }}>
-  const i = setInterval(() => {
-    if (!window.DisqusWidget) return;
-    window.DISQUS_EMBED_URL = DISQUS_EMBED_URL;
-    window.DisqusWidget.init();
-    clearInterval(i);
-  }, 100);
+  window.addEventListener(
+    "scroll",
+    function () {
+      console.log("Activate Disqus Widget");
+      const i = setInterval(() => {
+        if (!window.DisqusWidget) return;
+        window.DISQUS_EMBED_URL = DISQUS_EMBED_URL;
+        window.DisqusWidget.init();
+        clearInterval(i);
+      }, 100);
+    },
+    { capture: true, once: true },
+  );
 </script>
