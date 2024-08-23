@@ -43,6 +43,17 @@ export default defineConfig({
         forward: ["dataLayer.push"],
       },
     }),
+    (await import("astro-compress")).default({
+      CSS: false,
+      HTML: {
+        "html-minifier-terser": {
+          removeAttributeQuotes: false,
+        },
+      },
+      Image: false,
+      JavaScript: false,
+      SVG: false,
+    }),
   ],
   markdown: {
     remarkPlugins: [
