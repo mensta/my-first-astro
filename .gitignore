@@ -34,6 +34,7 @@ public/
 src/config/config.json
 src/config/menu.json
 src/config/social.json
+src/config/adsense.json
 
 # ignore images
-src/assets/
+src/assets/images/
