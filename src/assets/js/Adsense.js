@@ -29,7 +29,7 @@ function insertInArticleAds() {
     insertCount++;
   }
 
-  Array(insertCount).fill().forEach(() => (adsbygoogle = window.adsbygoogle || []).push({}));
+  Array(insertCount).fill().forEach(() => (window.adsbygoogle = window.adsbygoogle || []).push({}));
 }
 
 window.addEventListener(
