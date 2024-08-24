@@ -1,4 +1,6 @@
 ---
+import { getImage } from "astro:assets";
+
 import Base from "@/layouts/Base.astro";
 import SearchBar from "@/layouts/SearchBar";
 import { getSinglePage } from "@/lib/contentParser.astro";
@@ -6,9 +8,13 @@ import { getSinglePage } from "@/lib/contentParser.astro";
 // Retrieve all articles
 const posts = await getSinglePage("posts");
 
-const images = import.meta.glob<{ default: ImageMetadata }>(
-  "/src/assets/**/*.{jpeg,jpg,png,gif}",
-);
+const importImage = async (image: string) => {
+  try {
+    return await import(`../assets${image}`);
+  } catch (e) {
+    return null;
+  }
+};
 
 // List of items to search in
 const searchList = await Promise.all(
@@ -16,12 +22,14 @@ const searchList = await Promise.all(
     item.data = Object.assign({}, item.data);
 
     if (item.data.image) {
-      if (!images[`/src/assets${item.data.image}`]) {
+      const imported = await importImage(item.data.image);
+
+      if (!imported) {
         item.data.importedImage = item.data.image;
       } else {
-        item.data.importedImage = (
-          await images[`/src/assets${item.data.image}`]()
-        ).default.src;
+        item.data.importedImage = await getImage({
+          src: imported.default,
+        });
       }
     }
 
