@@ -53,6 +53,8 @@ const eyeCatchImage = await (async () => {
   if (_importedImage) {
     const optimizedImage = await getImage({
       src: _importedImage.default,
+      width: 1000,
+      height: 500
     });
     return optimizedImage.src;
   }
