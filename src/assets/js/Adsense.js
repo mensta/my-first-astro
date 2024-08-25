@@ -4,11 +4,9 @@ const ADSENSE_PUB_ID = config.adsense_pub_id;
 const ADSENSE_INARTICLE_SLOT_ID = config.adsense_inarticle_slot_id;
 const ADSENSE_TEST_MODE = config.adsense_test_mode;
 
-let onceCalled = false;
+let oncePageLoaded = false;
 
 function insertInArticleAds() {
-  onceCalled = true;
-
   const h2Elements = document.querySelectorAll("article h2");
   const endAdContainer = document.getElementById("article-end-ad");
   const adCode = `
@@ -55,7 +53,9 @@ window.addEventListener(
 );
 
 document.addEventListener('astro:page-load', () => {
-  if (onceCalled) {
-    insertInArticleAds();
+  if (!oncePageLoaded) {
+    oncePageLoaded = true;
+    return;
   }
+  insertInArticleAds();
 });
