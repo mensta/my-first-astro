@@ -7,7 +7,6 @@ import Footer from "@/partials/Footer.astro";
 import Header from "@/partials/Header.astro";
 import "@/styles/main.scss";
 import { AstroFont } from "astro-font";
-import { ViewTransitions } from "astro:transitions";
 import { getImage } from "astro:assets";
 
 // font families
@@ -132,8 +131,6 @@ const eyeCatchImage = await (async () => {
           (description ? description : config.metadata.meta_description),
       )}
     />
-
-    <ViewTransitions />
 
     <!-- author from config.json -->
     <meta name="author" content={config.metadata.meta_author} />
