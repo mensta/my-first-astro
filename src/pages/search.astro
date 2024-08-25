@@ -24,6 +24,8 @@ const searchList = await Promise.all(
       } else {
         item.data.importedImage = await getImage({
           src: imported.default,
+          width: 1000,
+          height: 500
         });
       }
     }
