@@ -49,7 +49,7 @@ const shortenedContent = content
 
 const eyeCatchImage = await (async () => {
   const _importedImage = await Promise.resolve(importedImage);
-  if (_importedImage) {
+  if (_importedImage && typeof _importedImage !== 'string') {
     const optimizedImage = await getImage({
       src: _importedImage.default,
       width: 1000,
