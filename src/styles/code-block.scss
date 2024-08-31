@@ -1,0 +1,14 @@
+code {
+  padding: .2em .4em;
+  background: #215aa012;
+  border-radius: 4px;
+  vertical-align: .08em;
+
+  &::before {
+    content: "" !important;
+  }
+
+  &::after {
+    content: "" !important;
+  }
+}
