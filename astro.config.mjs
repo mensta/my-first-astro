@@ -6,7 +6,7 @@ import AutoImport from "astro-auto-import";
 import { defineConfig, squooshImageService } from "astro/config";
 import remarkCollapse from "remark-collapse";
 import remarkToc from "remark-toc";
-import remarkLinkCard from 'remark-link-card';
+import remarkLinkCardKai from "remark-link-card-kai";
 import partytown from "@astrojs/partytown";
 import config from "./src/config/config.json";
 
@@ -65,7 +65,7 @@ export default defineConfig({
         },
       ],
       [
-        remarkLinkCard,
+        remarkLinkCardKai,
         {
           cache: true,
           shortenUrl: true,

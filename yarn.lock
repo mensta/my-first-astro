@@ -4168,10 +4168,8 @@ remark-gfm@^4.0.0:
     remark-stringify "^11.0.0"
     unified "^11.0.0"
 
-remark-link-card@^1.3.1:
-  version "1.3.1"
-  resolved "https://registry.yarnpkg.com/remark-link-card/-/remark-link-card-1.3.1.tgz#48c16134f08fb92587d8ef6ace1c96d456d112cb"
-  integrity sha512-V7xP2jpf/s+bFQvV51+k1iJP3uIWBjUuja3CNw2LAKOj7jCei1D9hpNr9xRqPKpSEe97gePnKbckf/dZl7Vkug==
+remark-link-card-kai@./remark-link-card-kai:
+  version "1.3.2"
   dependencies:
     he "^1.2.0"
     node-fetch "^2.6.1"
