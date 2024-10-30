@@ -3,6 +3,7 @@ import config from "@/config/adsense.json";
 const ADSENSE_PUB_ID = config.adsense_pub_id;
 const ADSENSE_INARTICLE_SLOT_ID = config.adsense_inarticle_slot_id;
 const ADSENSE_TEST_MODE = config.adsense_test_mode;
+const ADSENSE_DISABLED = config.adsense_disabled;
 
 let oncePageLoaded = false;
 
@@ -37,6 +38,8 @@ function insertInArticleAds() {
 window.addEventListener(
   "scroll",
   function () {
+    if (ADSENSE_DISABLED) return;
+
     console.log("Activate Google AdSense");
 
     insertInArticleAds();
