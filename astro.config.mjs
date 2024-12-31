@@ -45,7 +45,7 @@ export default defineConfig({
     }),
     (await import("astro-compress")).default({
       CSS: false,
-      HTML: {
+      HTML: config.settings.disable_html_compression ? false : {
         "html-minifier-terser": {
           removeAttributeQuotes: false,
         },
