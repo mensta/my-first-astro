@@ -15,7 +15,7 @@
   ],
   "license": "Apache-2.0",
   "files": [
-    "dist"
+    "_dist"
   ],
   "type": "module",
   "sideEffects": false,
@@ -28,11 +28,11 @@
     "not op_mini all"
   ],
   "exports": {
-    "types": "./dist/index.d.ts",
-    "import": "./dist/index.min.js"
+    "types": "./_dist/index.d.ts",
+    "import": "./_dist/index.min.js"
   },
-  "types": "./dist/index.d.ts",
-  "module": "./dist/index.min.js",
+  "types": "./_dist/index.d.ts",
+  "module": "./_dist/index.min.js",
   "prettier": "tomer/prettier",
   "dependencies": {
     "@types/hast": "^3.0.4",
@@ -63,6 +63,6 @@
     "typecheck": "tomer typecheck",
     "test": "tomer test",
     "build": "tomer build",
-    "clean": "tomer clean dist"
+    "clean": "tomer clean _dist"
   }
 }
