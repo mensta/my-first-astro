@@ -9,6 +9,8 @@ import remarkToc from "remark-toc";
 import remarkLinkCardKai from "remark-link-card-kai";
 import partytown from "@astrojs/partytown";
 import config from "./src/config/config.json";
+import remarkDirective from "remark-directive";
+import { remarkAdmonition } from "remark-alert-kai";
 
 // https://astro.build/config
 export default defineConfig({
@@ -58,6 +60,8 @@ export default defineConfig({
   markdown: {
     remarkPlugins: [
       remarkToc,
+      remarkDirective,
+      remarkAdmonition,
       [
         remarkCollapse,
         {
