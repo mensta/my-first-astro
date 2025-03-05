@@ -8,6 +8,12 @@ let h4 = h5 * font_scale;
 let h3 = h4 * font_scale;
 let h2 = h3 * font_scale;
 let h1 = h2 * font_scale;
+
+h3 *= 0.9;
+h4 *= 0.9;
+h5 *= 0.9;
+h6 *= 0.9;
+
 let fontPrimary, fontPrimaryType, fontSecondary, fontSecondaryType;
 if (theme.fonts.font_family.primary) {
   fontPrimary = theme.fonts.font_family.primary
