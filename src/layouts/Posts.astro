@@ -41,7 +41,7 @@ posts.forEach((post: any) => {
             />
           </a>
         )}
-        <ul class="mt-6 mb-4 flex flex-wrap items-center text-text">
+        <ul class="mt-4 mb-3 flex flex-wrap items-center text-text">
           <li class="mr-5 flex items-center flex-wrap font-medium">
             <BiCalendarEdit className="mr-1 h-5 w-5 text-gray-600" />
             <>{dateFormat(post.data.date)}</>
@@ -65,7 +65,7 @@ posts.forEach((post: any) => {
             </>
           </li>
         </ul>
-        <h3 class="mb-4">
+        <h3 class="mb-3">
           <a
             href={`/${post.slug}/`}
             class="block hover:text-primary transition duration-300"
