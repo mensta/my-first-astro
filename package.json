@@ -26,6 +26,7 @@
     "react-dom": "^18.3.1",
     "react-icons": "^5.2.1",
     "react-lite-youtube-embed": "^2.4.0",
+    "rehype-plugin-image-native-lazy-loading": "^1.2.0",
     "remark-alert-kai": "./remark-alert-kai",
     "remark-collapse": "^0.1.2",
     "remark-directive": "^4.0.0",

@@ -11,6 +11,7 @@ import partytown from "@astrojs/partytown";
 import config from "./src/config/config.json";
 import remarkDirective from "remark-directive";
 import { remarkAdmonition } from "remark-alert-kai";
+import lazyLoadPlugin from "rehype-plugin-image-native-lazy-loading";
 
 // https://astro.build/config
 export default defineConfig({
@@ -75,6 +76,9 @@ export default defineConfig({
           shortenUrl: true,
         },
       ],
+    ],
+    rehypePlugins: [
+      lazyLoadPlugin
     ],
     shikiConfig: {
       theme: "one-dark-pro",
