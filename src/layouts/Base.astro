@@ -59,6 +59,14 @@ const eyeCatchImage = await (async () => {
   }
   return image;
 })();
+
+const eyecatchImageUrl = (() => {
+  if (eyeCatchImage && eyeCatchImage.startsWith('http')) {
+    return eyeCatchImage;
+  }
+  return `${config.site.base_url}${eyeCatchImage ? eyeCatchImage : config.metadata.meta_image}`;
+})();
+
 ---
 
 <!doctype html>
@@ -174,17 +182,13 @@ const eyeCatchImage = await (async () => {
     <!-- og-image -->
     <meta
       property="og:image"
-      content={`${config.site.base_url}${
-        eyeCatchImage ? eyeCatchImage : config.metadata.meta_image
-      }`}
+      content={eyecatchImageUrl}
     />
 
     <!-- twitter-image -->
     <meta
       name="twitter:image"
-      content={`${config.site.base_url}${
-        eyeCatchImage ? eyeCatchImage : config.metadata.meta_image
-      }`}
+      content={eyecatchImageUrl}
     />
     <meta name="twitter:card" content="summary_large_image" />
 
