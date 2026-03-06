@@ -17,7 +17,7 @@ export async function GET(context: { site: URL }) {
     site: context.site,
     items: sorted.map((post: any) => ({
       title: post.data.title,
-      pubDate: post.data.date ? new Date(post.data.date) : undefined,
+      ...(post.data.date ? { pubDate: new Date(post.data.date) } : {}),
       description: post.data.description || "",
       link: `/${post.slug}/`,
     })),
