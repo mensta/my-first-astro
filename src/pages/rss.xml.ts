@@ -15,12 +15,17 @@ export async function GET(context: { site: URL }) {
     title: config.site.title,
     description: config.metadata.meta_description,
     site: context.site,
-    items: sorted.map((post: any) => ({
-      title: post.data.title,
-      ...(post.data.date ? { pubDate: new Date(post.data.date) } : {}),
-      description: post.data.description || "",
-      link: `/${post.slug}/`,
-    })),
+    items: sorted.map((post: any) => {
+      const pubDate = post.data.date
+        ? new Date(post.data.date.replace(" ", "T"))
+        : undefined;
+      return {
+        title: post.data.title,
+        ...(pubDate && !isNaN(pubDate.getTime()) ? { pubDate } : {}),
+        description: post.data.description || "",
+        link: `/${post.slug}/`,
+      };
+    }),
     customData: `<language>${config.site.lang || "en"}</language>`,
   });
 }
