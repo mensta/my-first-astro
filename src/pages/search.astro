@@ -40,7 +40,7 @@ const searchList = config.settings.disable_search ? [] : await Promise.all(
 );
 ---
 
-<Base title={`Search`}>
+<Base title={`Search`} noindex={true}>
   <section class="section">
     <div class="container">
       {!config.settings.disable_search && (<SearchBar client:load searchList={searchList} />)}

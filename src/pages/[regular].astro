@@ -40,6 +40,9 @@ const eyeCatchImage = (() => {
   image={image}
   importedImage={eyeCatchImage}
   content={page.body}
+  type={postsSlug.includes(page.slug) ? "article" : "website"}
+  date={postsSlug.includes(page.slug) ? page.data.date : undefined}
+  postAuthors={postsSlug.includes(page.slug) ? page.data.authors : undefined}
 >
   {
     postsSlug.includes(page.slug) ? (

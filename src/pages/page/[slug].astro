@@ -31,7 +31,7 @@ const indexOfFirstPost = indexOfLastPost - config.settings.pagination;
 const currentPosts = sortedPosts.slice(indexOfFirstPost, indexOfLastPost);
 ---
 
-<Base>
+<Base canonical={`${config.site.base_url}/page/${slug}/`}>
   <section class="section">
     <div class="container">
       <Posts className="mb-16" posts={currentPosts} />
