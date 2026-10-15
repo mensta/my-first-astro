@@ -23,13 +23,17 @@ const { Content } = await post.render();
 const { title, description, authors, categories, image, date, tags } =
   post.data;
 
+// アイキャッチが CDN などの絶対 URL のときは、そのまま使う(Base.astro の og:image と同じ扱い)
+const toAbsoluteUrl = (path: string) =>
+  /^https?:\/\//.test(path) ? path : `${config.site.base_url}${path}`;
+
 const articleSchema = {
   "@context": "https://schema.org",
   "@type": "Article",
   "headline": title,
   "description": description || "",
   "datePublished": date ? new Date(date).toISOString() : undefined,
-  "image": image ? `${config.site.base_url}${image}` : `${config.site.base_url}${config.metadata.meta_image}`,
+  "image": toAbsoluteUrl(image || config.metadata.meta_image),
   "author": (authors || ["admin"]).map((author: string) => ({
     "@type": "Person",
     "name": author,
