@@ -28,12 +28,11 @@ if (theme.fonts.font_family.secondary) {
   fontSecondaryType = theme.fonts.font_family.secondary_type;
 }
 
-// 日本語のフォント。Mac は Hiragino を優先し、Hiragino がない環境では Web フォントの Noto Sans JP を使う
+// 日本語のフォント。Zenn と同じ順(Mac は Hiragino、Windows は Meiryo)
 const fontJapanese = [
-  '"Hiragino Sans"', // Mac: 今までどおりの字体
   '"Hiragino Kaku Gothic ProN"',
-  '"Noto Sans JP"', // Windows など: Web フォント(本文の太さ 500)
-  '"Yu Gothic"',
+  '"Hiragino Sans"',
+  'Meiryo',
 ];
 
 /** @type {import('tailwindcss').Config} */
