@@ -28,13 +28,12 @@ if (theme.fonts.font_family.secondary) {
   fontSecondaryType = theme.fonts.font_family.secondary_type;
 }
 
-// 日本語のフォント。Web フォントを先に使い、読めないときだけ OS の日本語ゴシックに任せる
+// 日本語のフォント。Mac は Hiragino を優先し、Hiragino がない環境では Web フォントの Noto Sans JP を使う
 const fontJapanese = [
-  '"Noto Sans JP"',
-  '"Hiragino Sans"',
+  '"Hiragino Sans"', // Mac: 今までどおりの字体
   '"Hiragino Kaku Gothic ProN"',
+  '"Noto Sans JP"', // Windows など: Web フォント(本文の太さ 500)
   '"Yu Gothic"',
-  '"Noto Sans JP"',
 ];
 
 /** @type {import('tailwindcss').Config} */
