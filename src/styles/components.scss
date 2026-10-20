@@ -83,6 +83,12 @@
   @apply rounded-md border-border py-3 text-text focus:border-primary focus:ring-transparent;
 }
 
+// 記事の横幅。タイトル・アイキャッチ・本文で同じ幅にそろえる(md 未満は全幅)
+.article-measure {
+  max-width: var(--content-measure, 100%);
+  margin-inline: auto;
+}
+
 // content style
 // 文字サイズ・行高・見出し・余白は base.scss の --content-* / --h*-* トークンで決める。
 .content {

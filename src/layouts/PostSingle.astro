@@ -78,7 +78,7 @@ const breadcrumbSchema = {
 <section class="section">
   <div class="container">
     <article class="row justify-center">
-      <div class="md:col-10 text-center">
+      <div class="md:col-10 text-center article-measure">
         <h1 set:html={markdownify(title)} class="h2" />
         <ul class="mt-4 flex flex-wrap items-center justify-center text-text">
           <li class="mx-3 flex items-center flex-wrap font-medium">
@@ -108,7 +108,7 @@ const breadcrumbSchema = {
         </ul>
       </div>
 
-      <div class="md:col-10 mt-8 mb-2">
+      <div class="md:col-10 mt-8 mb-2 article-measure">
         {
           image && eyeCatchImage && (
             <Image
@@ -122,7 +122,7 @@ const breadcrumbSchema = {
         }
       </div>
 
-      <div class="md:col-10">
+      <div class="md:col-10 article-measure">
         <div class="content mb-16 text-left">
           <Content />
         </div>
