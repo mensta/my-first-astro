@@ -71,3 +71,12 @@ posts.forEach((post: any) => {
     ))
   }
 </div>
+
+<style>
+  /* カードの見出し: balance と pretty は行を短くするので、折り返しは wrap にして行幅を使い切る。語の途中で切れることを許容する */
+  h3 {
+    text-wrap: wrap;
+    word-break: normal;
+    line-break: strict;
+  }
+</style>

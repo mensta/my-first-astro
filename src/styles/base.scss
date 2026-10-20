@@ -56,7 +56,8 @@ h2,
   @apply text-h2-sm md:text-h2;
 }
 
-h2 {
+// 下線と余白は記事本文の h2 だけ。「関連記事」や 404 など本文の外の h2 には付けない
+.content h2 {
   border-bottom: 1px solid #d6e3ed;
   padding-bottom: .3em;
   margin-top: 1.3em;

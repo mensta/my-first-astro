@@ -9,6 +9,17 @@ import { BiCalendarEdit, BiCategoryAlt } from "react-icons/bi";
 const { summary_length } = config.settings;
 const { className, posts, fluid } = Astro.props;
 
+// 抜粋用に Markdown の記号を落とす。plainify は「**「…」**」のように強調の直後が日本語だと
+// 強調として解釈できず ** が残るため、切り出す前にここで取り除く。
+const stripMarkdown = (text: string) =>
+  text
+    .replace(/```[\s\S]*?```/g, "")
+    .replace(/^:::.*$/gm, "")
+    .replace(/!\[[^\]]*\]\([^)]*\)/g, "")
+    .replace(/\[([^\]]*)\]\([^)]*\)/g, "$1")
+    .replace(/^#{1,6}\s+/gm, "")
+    .replace(/(\*\*|__|~~|\*|`)/g, "");
+
 const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/**/*.{jpeg,jpg,png,gif}');
 
 posts.forEach((post: any) => {
@@ -75,7 +86,7 @@ posts.forEach((post: any) => {
         </h3>
         <p class="text-text">
           {plainify(
-            post.body?.replace(/http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w-.\/?%&=]*)?/gi, "")?.slice(
+            stripMarkdown(post.body ?? "").replace(/http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w-.\/?%&=]*)?/gi, "")?.slice(
               0,
               Number(
                 summary_length
@@ -92,5 +103,13 @@ posts.forEach((post: any) => {
 <style>
   .eye-catch {
     object-fit: cover;
+    aspect-ratio: 16 / 9; /* 画像の元サイズに関わらず、同じ行のカードで画像の高さを揃える */
+  }
+
+  /* カードの見出し: balance と pretty は行を短くするので、折り返しは wrap にして行幅を使い切る。語の途中で切れることを許容する */
+  h3 {
+    text-wrap: wrap;
+    word-break: normal;
+    line-break: strict;
   }
 </style>

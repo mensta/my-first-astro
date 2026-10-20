@@ -10,28 +10,22 @@ const pageList: any[] = [];
 // Maximum number of page buttons to display
 const maxPageNumbers = 5;
 
-if (totalPages > maxPageNumbers) {
-  for (let i = 0; i < maxPageNumbers; i++) {
-    const page = currentPage + i - 2;
+// 先頭・末尾・現在のページの前後だけを残す
+const visiblePages = new Set<number>([1, totalPages]);
+for (let i = 0; i < maxPageNumbers; i++) {
+  const page = currentPage + i - Math.floor(maxPageNumbers / 2);
+  if (page > 1 && page < totalPages) visiblePages.add(page);
+}
 
-    if (page <= 1 || pageList.includes(page) || page >= totalPages) {
-      continue;
-    }
+// 省略記号は、間が 2 ページ以上空くときだけ入れる(1 ページだけなら、そのページを出す)。連続して 2 つ並ぶことはない
+[...visiblePages]
+  .sort((a, b) => a - b)
+  .forEach((page, i, pages) => {
+    const gap = i > 0 ? page - pages[i - 1] - 1 : 0;
+    if (gap === 1) pageList.push(page - 1);
+    if (gap >= 2) pageList.push("...");
     pageList.push(page);
-  }
-}
-
-if (pageList[0] === 2) {
-  pageList.unshift(1);
-} else {
-  pageList.unshift(1, "...");
-}
-
-if (pageList[pageList.length - 1] === totalPages - 1) {
-  pageList.push(totalPages);
-} else {
-  pageList.push("...", totalPages);
-}
+  });
 ---
 
 {

@@ -95,6 +95,17 @@
   word-break: auto-phrase;
 }
 
+// 本文中の画像(Markdown の画像記法で入ったもの)は、prose の上下余白を受けず、<picture> の図と同じ余白にする
+.content p > img {
+  margin: 0;
+}
+
+// 図の直後の見出しは、図との間を本文の 1 行分にする(見出しの上余白が図の下で大きく空くのを防ぐ)
+.content p:has(> img) + h2,
+.content p:has(> img) + h3 {
+  margin-top: var(--content-line);
+}
+
 // content style
 // 文字サイズ・行高・見出し・余白は base.scss の --content-* / --h*-* トークンで決める。
 .content {
@@ -200,6 +211,13 @@
       @apply px-5 py-3;
     }
   }
+}
+
+// alert(:::)の中の表: 列が多いと枠(padding と左罫線の分だけ狭い)からはみ出すので、表だけ枠の中で横スクロールにする。
+// 枠の外の表はそのまま。
+.content .markdown-alert table {
+  @apply block overflow-x-auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 // 見出しの直後は、何が来ても見出しの下余白だけにする(見出しは下の内容の方に近づける)。
