@@ -28,8 +28,9 @@ if (theme.fonts.font_family.secondary) {
   fontSecondaryType = theme.fonts.font_family.secondary_type;
 }
 
-// 日本語のフォントフォールバック(Mulish には日本語の字形がないため、OS の日本語ゴシックに任せる)
+// 日本語のフォント。Web フォントを先に使い、読めないときだけ OS の日本語ゴシックに任せる
 const fontJapanese = [
+  '"Noto Sans JP"',
   '"Hiragino Sans"',
   '"Hiragino Kaku Gothic ProN"',
   '"Yu Gothic"',

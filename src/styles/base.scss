@@ -32,7 +32,7 @@ html {
 }
 
 body {
-  @apply bg-body font-primary font-normal leading-relaxed text-text;
+  @apply bg-body font-primary font-medium leading-relaxed text-text; // 日本語の字が細く見えないよう、本文は中くらいの太さ(500)
 }
 
 h1,
