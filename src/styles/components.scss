@@ -114,26 +114,13 @@
   line-height: var(--content-lh);
   max-width: var(--content-measure);
   margin-inline: auto;
-  // 日本語の組版: 禁則を厳しめに、文節で改行、和欧文の間に自動で空き
-  line-break: strict;
-  word-break: normal;
-  word-break: auto-phrase; // 未対応のブラウザでは無視され、上の normal になる
+  // 日本語の組版: 折り返しはブラウザ標準(右端まで詰めて折り返す)。和欧文の間に自動で空き
   text-autospace: normal;
 
   p,
   > ul,
   > ol {
     margin-block: var(--block-gap);
-  }
-
-  p {
-    text-wrap: pretty;
-  }
-
-  h2,
-  h3,
-  h4 {
-    text-wrap: balance;
   }
 
   h2 {
