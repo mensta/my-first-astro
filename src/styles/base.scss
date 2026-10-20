@@ -1,3 +1,32 @@
+// 本文(.content)の文字組みトークン。見出しの大きさと余白は、本文の文字サイズと「1 行の高さ」の倍数で決める。
+// スマホ: 16px / 行高 1.8(1 行 28.8px)。md 以上: 17px / 行高 1.9(1 行 32.3px)、本文の幅は 680px(約 40 字)。
+:root {
+  --content-fs: 16px;
+  --content-lh: 1.8;
+  --content-line: calc(var(--content-fs) * var(--content-lh));
+  --content-measure: none;
+
+  --h2-fs: calc(var(--content-fs) * 1.5);
+  --h3-fs: calc(var(--content-fs) * 1.25);
+  --h4-fs: calc(var(--content-fs) * 1.125);
+
+  --h2-mt: calc(var(--content-line) * 2.5);
+  --h2-mb: var(--content-line);
+  --h3-mt: calc(var(--content-line) * 2);
+  --h3-mb: calc(var(--content-line) * 0.5);
+  --h4-mt: calc(var(--content-line) * 1.5);
+  --h4-mb: calc(var(--content-line) * 0.5);
+  --block-gap: calc(var(--content-line) * 0.75);
+}
+
+@screen md {
+  :root {
+    --content-fs: 17px;
+    --content-lh: 1.9;
+    --content-measure: 680px;
+  }
+}
+
 html {
   @apply text-base;
 }
@@ -13,6 +42,8 @@ h4,
 h5,
 h6 {
   @apply font-primary font-bold leading-tight text-dark;
+  text-wrap: balance;
+  word-break: auto-phrase; // 文節単位で折り返す。未対応のブラウザでは無視される
 }
 
 h1,
@@ -28,7 +59,7 @@ h2,
 h2 {
   border-bottom: 1px solid #d6e3ed;
   padding-bottom: .3em;
-  margin-top: 1.3em !important;
+  margin-top: 1.3em;
 }
 
 h3,

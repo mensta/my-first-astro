@@ -10,8 +10,17 @@ import remarkLinkCardKai from "remark-link-card-kai";
 import partytown from "@astrojs/partytown";
 import config from "./src/config/config.json";
 import remarkDirective from "remark-directive";
-import { remarkAdmonition } from "remark-alert-kai";
+import { remarkAdmonition, DEFAULT_ADMONITION_TYPES } from "remark-alert-kai";
 import lazyLoadPlugin from "rehype-plugin-image-native-lazy-loading";
+
+// アラート記法(:::note など)の種類。`types` を渡すと既定の種類(note / tip / warning / danger)が
+// 置き換わるため、既定を引き継いだうえで important と caution を足す。
+// `:::info` は登録していない(描画されない)。
+const admonitionTypes = new Map([
+  ...DEFAULT_ADMONITION_TYPES,
+  ["important", { defaultLabel: "Important" }],
+  ["caution", { defaultLabel: "Caution" }],
+]);
 
 // https://astro.build/config
 export default defineConfig({
@@ -62,7 +71,7 @@ export default defineConfig({
     remarkPlugins: [
       remarkToc,
       remarkDirective,
-      remarkAdmonition,
+      [remarkAdmonition, { types: admonitionTypes }],
       [
         remarkCollapse,
         {

@@ -84,8 +84,116 @@
 }
 
 // content style
+// 文字サイズ・行高・見出し・余白は base.scss の --content-* / --h*-* トークンで決める。
 .content {
-  @apply prose max-w-none prose-headings:font-bold prose-h1:mb-4 prose-h1:text-h1-sm prose-h2:mb-4 prose-h2:mt-4 prose-h2:text-h2-sm prose-h3:mt-4 prose-h3:text-h3-sm prose-h4:mt-4 prose-h5:mb-4 prose-h6:mb-6 prose-blockquote:border-primary prose-blockquote:bg-theme-light prose-blockquote:px-7 prose-blockquote:py-3 prose-blockquote:leading-8 prose-pre:px-6 prose-pre:py-5 md:prose-h1:text-h1 md:prose-h2:text-h2 md:prose-h3:text-h3;
+  @apply prose prose-headings:font-bold prose-h1:mb-4 prose-h1:text-h1-sm prose-h2:mb-4 prose-h2:mt-4 prose-h2:text-h2-sm prose-h3:mt-4 prose-h3:text-h3-sm prose-h4:mt-4 prose-h5:mb-4 prose-h6:mb-6 prose-blockquote:border-primary prose-blockquote:bg-theme-light prose-blockquote:px-7 prose-blockquote:py-3 prose-blockquote:leading-8 prose-pre:px-6 prose-pre:py-5 md:prose-h1:text-h1 md:prose-h2:text-h2 md:prose-h3:text-h3;
+  font-size: var(--content-fs);
+  line-height: var(--content-lh);
+  max-width: var(--content-measure);
+  margin-inline: auto;
+  // 日本語の組版: 禁則を厳しめに、文節で改行、和欧文の間に自動で空き
+  line-break: strict;
+  word-break: normal;
+  word-break: auto-phrase; // 未対応のブラウザでは無視され、上の normal になる
+  text-autospace: normal;
+
+  p,
+  > ul,
+  > ol {
+    margin-block: var(--block-gap);
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  h2,
+  h3,
+  h4 {
+    text-wrap: balance;
+  }
+
+  h2 {
+    font-size: var(--h2-fs);
+    line-height: 1.45;
+    margin-block: var(--h2-mt) var(--h2-mb);
+  }
+
+  h3 {
+    font-size: var(--h3-fs);
+    line-height: 1.5;
+    margin-block: var(--h3-mt) var(--h3-mb);
+  }
+
+  h4 {
+    font-size: var(--h4-fs);
+    line-height: 1.6;
+    margin-block: var(--h4-mt) var(--h4-mb);
+  }
+
+  // 長い URL は枠からはみ出さないよう、どこでも折り返す
+  a {
+    overflow-wrap: anywhere;
+  }
+}
+
+// content table style (Markdown tables in post body)
+// 見出し行は淡いグレーの太字、全セルを細い罫線で区切るグリッド、角丸の外枠。
+// 先頭列は特別扱いしない(強調したい語は Markdown の **太字** で書く)。
+.content table {
+  @apply my-8 w-full border-separate rounded-lg border border-border text-[0.875rem] leading-relaxed;
+  border-spacing: 0;
+
+  th,
+  td {
+    @apply border-0 border-b border-r border-border px-2.5 py-2.5 text-left align-top;
+    &:last-child {
+      @apply border-r-0;
+    }
+  }
+
+  thead th {
+    @apply bg-theme-dark/[0.04] font-bold text-dark;
+  }
+  thead th:first-child {
+    @apply rounded-tl-[calc(0.5rem-1px)];
+  }
+  thead th:last-child {
+    @apply rounded-tr-[calc(0.5rem-1px)];
+  }
+
+  tbody tr:last-child td {
+    @apply border-b-0;
+  }
+
+  // 3 列以上の表は、スマホ幅だと 1 列が 4〜5 文字幅になり読めないので、列に最小幅を持たせて表だけ横スクロールにする。
+  // 2 列以下は折り返しで幅に収まるので、そのまま全幅で表示する。
+  @media (max-width: 479px) {
+    &:has(th:nth-child(3), td:nth-child(3)) {
+      @apply block overflow-x-auto;
+      -webkit-overflow-scrolling: touch;
+
+      th,
+      td {
+        @apply min-w-[10em];
+      }
+    }
+  }
+
+  @screen md {
+    @apply text-[0.9375rem];
+    word-break: auto-phrase; // スマホでは文節単位にすると最小幅が広がり、はみ出すので md 以上だけ
+    th,
+    td {
+      @apply px-5 py-3;
+    }
+  }
+}
+
+// 見出しの直後は、何が来ても見出しの下余白だけにする(見出しは下の内容の方に近づける)。
+// 要素別の margin-top(表の my-8、リストの余白など)より後に置く。
+.content :is(h2, h3, h4) + * {
+  margin-top: 0;
 }
 
 // tab

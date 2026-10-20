@@ -28,6 +28,14 @@ if (theme.fonts.font_family.secondary) {
   fontSecondaryType = theme.fonts.font_family.secondary_type;
 }
 
+// 日本語のフォントフォールバック(Mulish には日本語の字形がないため、OS の日本語ゴシックに任せる)
+const fontJapanese = [
+  '"Hiragino Sans"',
+  '"Hiragino Kaku Gothic ProN"',
+  '"Yu Gothic"',
+  '"Noto Sans JP"',
+];
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"],
@@ -68,7 +76,7 @@ module.exports = {
         h6: h6 + "rem",
       },
       fontFamily: {
-        primary: [fontPrimary, fontPrimaryType],
+        primary: [fontPrimary, ...fontJapanese, fontPrimaryType],
         secondary: [fontSecondary, fontSecondaryType],
       },
     },
