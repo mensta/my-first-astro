@@ -89,6 +89,12 @@
   margin-inline: auto;
 }
 
+// 記事タイトルは行の均等割り(balance)をやめ、語句単位で折り返す
+.article-title {
+  text-wrap: wrap;
+  word-break: auto-phrase;
+}
+
 // content style
 // 文字サイズ・行高・見出し・余白は base.scss の --content-* / --h*-* トークンで決める。
 .content {
